@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BeyondTheCV — Mahfuzur Rahman</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ============================================
+       CSS VARIABLES — Brand settings for your site
+    ============================================ */
+    :root {
+      --ink:       #1a1612;
+      --paper:     #f5f0e8;
+      --cream:     #ede7d9;
+      --gold:      #2c7a7b; /* Swapped to a sophisticated deep teal/emerald for a biomedical/scientific feel */
+      --gold-lt:   #319795;
+      --muted:     #7a7065;
+      --rule:      rgba(44,122,123,0.25);
+      --serif:     'Cormorant Garamond', Georgia, serif;
+      --sans:      'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    /* ============================================
+       NAVIGATION
+    ============================================ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(245,240,232,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+      transition: padding 0.3s;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: 0.3s; }
+
+    /* ============================================
+       HERO
+    ============================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 60px,
+        rgba(44,122,123,0.04) 60px,
+        rgba(44,122,123,0.04) 61px
+      );
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; max-width: 720px; }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.2em;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-sub {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+    .hero-divider {
+      width: 60px; height: 1px;
+      background: var(--gold);
+      margin: 0 auto 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.7s forwards;
+    }
+    .hero-desc {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+    .hero-cta {
+      display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.8s 1s forwards;
+    }
+    .btn {
+      padding: 0.8rem 2.2rem;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary { background: var(--gold); color: #fff; }
+    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--ink); border: 1px solid var(--rule); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0;
+      animation: fadeUp 1s 1.4s forwards;
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s 1.4s infinite;
+    }
+
+    /* ============================================
+       SECTION LAYOUT
+    ============================================ */
+    section { padding: 7rem 2rem; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .section-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+    .section-title { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 300; line-height: 1.15; margin-bottom: 1.5rem; }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .rule { width: 50px; height: 1px; background: var(--gold); margin-bottom: 2.5rem; }
+
+    /* ============================================
+       ABOUT SECTION
+    ============================================ */
+    #about { background: var(--cream); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 5rem; align-items: start; }
+    .about-portrait {
+      aspect-ratio: 3/4;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--muted);
+      font-size: 0.9rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-portrait::after { content: ''; position: absolute; inset: 8px; border: 1px solid var(--rule); pointer-events: none; }
+    .portrait-placeholder { text-align: center; padding: 1rem; line-height: 2; }
+    .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: 0.95rem; }
+    .about-text p:first-of-type { font-family: var(--serif); font-size: 1.25rem; color: var(--ink); font-style: italic; line-height: 1.6; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+    .tag { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.35rem 0.9rem; border: 1px solid var(--rule); color: var(--muted); border-radius: 2px; }
+
+    /* ============================================
+       DIARY SECTION
+    ============================================ */
+    #diary { background: var(--paper); }
+    .diary-grid { display: flex; flex-direction: column; gap: 0; }
+
+    .diary-entry {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 0 2.5rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s, transform 0.6s;
+    }
+    .diary-entry.visible { opacity: 1; transform: translateY(0); }
+    .diary-entry:first-child { border-top: 1px solid var(--rule); }
+
+    .entry-date {
+      font-family: var(--serif);
+      font-size: 0.8rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      padding-top: 0.3rem;
+      text-align: right;
+      border-right: 1px solid var(--rule);
+      padding-right: 2.5rem;
+    }
+    .entry-date .year { display: block; font-size: 1.6rem; font-weight: 300; line-height: 1; }
+    .entry-content { padding-left: 0; }
+    .entry-tag { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+    .entry-content h3 { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; margin-bottom: 0.5rem; }
+    .entry-content p { color: var(--muted); font-size: 0.9rem; }
+
+    .add-entry-box { margin-top: 3rem; padding: 2rem; border: 1px dashed var(--rule); background: var(--cream); }
+    .add-entry-box h4 { font-family: var(--serif); font-size: 1.1rem; font-style: italic; margin-bottom: 1.2rem; color: var(--muted); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-field label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    .form-field input, .form-field textarea, .form-field select { background: var(--paper); border: 1px solid var(--rule); padding: 0.65rem 0.9rem; font-family: var(--sans); font-size: 0.88rem; color: var(--ink); outline: none; transition: border-color 0.2s; border-radius: 2px; }
+    .form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: var(--gold); }
+    .form-field textarea { resize: vertical; min-height: 80px; }
+
+    /* ============================================
+       TIMELINE / RESUME SECTION
+    ============================================ */
+    #resume { background: var(--cream); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--rule); }
+    .timeline-item { position: relative; padding: 0 0 3rem 2.5rem; opacity: 0; transform: translateX(-15px); transition: opacity 0.6s, transform 0.6s; }
+    .timeline-item.visible { opacity: 1; transform: translateX(0); }
+    .timeline-dot { position: absolute; left: -5px; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: var(--gold); border: 2px solid var(--cream); }
+    .timeline-period { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+    .timeline-item h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; margin-bottom: 0.2rem; }
+    .timeline-item .org { font-size: 0.85rem; color: var(--muted); font-style: italic; margin-bottom: 0.6rem; }
+    .timeline-item p { font-size: 0.88rem; color: var(--muted); }
+
+    /* ============================================
+       CONTACT SECTION
+    ============================================ */
+    #contact { background: var(--ink); color: var(--paper); text-align: center; }
+    #contact .section-label { color: var(--gold-lt); }
+    #contact .section-title { color: var(--paper); }
+    #contact .rule { background: var(--gold-lt); margin: 0 auto 2.5rem; }
+    #contact p { color: rgba(245,240,232,0.6); max-width: 480px; margin: 0 auto 2.5rem; font-size: 0.92rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+    .contact-link { display: flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-lt); text-decoration: none; padding-bottom: 2px; border-bottom: 1px solid rgba(44,122,123,0.3); transition: border-color 0.2s, color 0.2s; }
+    .contact-link:hover { color: #fff; border-color: #fff; }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    footer { background: #0f0d0a; color: rgba(245,240,232,0.3); text-align: center; padding: 2rem; font-size: 0.75rem; letter-spacing: 0.08em; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.2; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--paper); padding: 1rem 2rem; border-bottom: 1px solid var(--rule); gap: 1.2rem; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-portrait { aspect-ratio: 1/1; }
+      .diary-entry { grid-template-columns: 1fr; gap: 0.5rem; }
+      .entry-date { text-align: left; border-right: none; border-bottom: 1px solid var(--rule); padding-right: 0; padding-bottom: 0.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">Mahfuzur<span>.</span>Rahman</a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#diary">Diary</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Engineering Solutions for Life Sciences</p>
+      <h1>Beyond<br><em>The CV</em></h1>
+      <div class="hero-divider"></div>
+      <p class="hero-sub">Applied Chemistry & Chemical Engineering Graduate</p>
+      <p class="hero-desc">
+        Welcome to my personal archive. This space bridges the gap between technical lab research, engineering principles, and the personal milestones that define my professional trajectory.
+      </p>
+      <div class="hero-cta">
+        <a href="#diary" class="btn btn-primary">Read My Diary</a>
+        <a href="#resume" class="btn btn-outline">View Resume</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label">The Researcher</p>
+      <h2 class="section-title">Hello, I'm <em>Mahfuzur Rahman</em></h2>
+      <div class="rule"></div>
+      <div class="about-grid">
+        <div class="about-portrait">
+          <div class="portrait-placeholder">
+            📷<br>Your photo<br>goes here
+          </div>
+        </div>
+        <div class="about-text">
+          <p>
+            "I believe that impactful science happens at the intersection of strict engineering principles and curious, creative human intuition."
+          </p>
+          <p>
+            As a graduate in Applied Chemistry and Chemical Engineering, my interest lies heavily within the pharmaceutical and biomedical sectors. I thrive on translating molecular concepts into scalable, real-world chemical processes that can enhance healthcare and drug manufacturing.
+          </p>
+          <p>
+            This website serves as my digital laboratory notebook—tracking not only my academic achievements but also my everyday thought experiments, creative reflections, and personal growth.
+          </p>
+          <div class="tag-row">
+            <span class="tag">🧪 Applied Chemistry</span>
+            <span class="tag">🧬 Biomedical tech</span>
+            <span class="tag">💊 Pharma QA/QC</span>
+            <span class="tag">🔬 R&D Analytics</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIARY SECTION -->
+  <section id="diary">
+    <div class="container">
+      <p class="section-label">My life chapters</p>
+      <h2 class="section-title">The <em>Diary</em></h2>
+      <div class="rule"></div>
+
+      <div class="diary-grid" id="diaryGrid">
+
+        <div class="diary-entry">
+          <div class="entry-date">
+            <span class="year">2026</span>
+            May 30
+          </div>
+          <div class="entry-content">
+            <p class="entry-tag">📚 Growth</p>
+            <h3>Launching My Digital Workspace</h3>
+            <p>Today marks the day I stepped away from rigid, plain text paper summaries. A career in chemical engineering is about building, and what better way to show potential industry peers my problem-solving approach than to build a curated archive of my journey?</p>
+          </div>
+        </div>
+
+        <div class="diary-entry">
+          <div class="entry-date">
+            <span class="year">2026</span>
+            May 12
+          </div>
+          <div class="entry-content">
+            <p class="entry-tag">🔬 Industry Insight</p>
+            <h3>The Role of Chemical Engineers in Modern Biomedicine</h3>
+            <p>Spent the afternoon reading up on advanced drug delivery systems. It's fascinating how core engineering kinetics and mass transport limitations apply perfectly to how molecules travel through biological pathways. Looking forward to exploring this bridge further in industry roles.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ADD ENTRY FORM -->
+      <div class="add-entry-box">
+        <h4>+ Add a temporary diary entry (Preview Live)</h4>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Date</label>
+            <input type="date" id="entryDate"/>
+          </div>
+          <div class="form-field">
+            <label>Category</label>
+            <select id="entryTag">
+              <option>🔬 Industry Insight</option>
+              <option>🌟 Academic Milestone</option>
+              <option>💡 Lesson learned</option>
+              <option>📚 Growth</option>
+              <option>💼 Career</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field" style="margin-bottom:1rem">
+          <label>Title</label>
+          <input type="text" id="entryTitle" placeholder="Give this moment a title…"/>
+        </div>
+        <div class="form-field" style="margin-bottom:1.2rem">
+          <label>Your story</label>
+          <textarea id="entryBody" placeholder="Write what happened, chemical processes explored, or what you learned…"></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="addEntry()">Add Entry</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUME / TIMELINE SECTION -->
+  <section id="resume">
+    <div class="container">
+      <p class="section-label">The professional journey</p>
+      <h2 class="section-title">My <em>Resume</em></h2>
+      <div class="rule"></div>
+
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <p class="timeline-period">Academic Graduate</p>
+          <h3>B.Sc. in Applied Chemistry & Chemical Engineering</h3>
+          <p class="org">University Name / Institute · City</p>
+          <p>Rigorous training focused on industrial unit operations, analytical chemistry instrumentation (HPLC, GC-MS, UV-Vis spectroscopy), chemical process design, and reactor mechanics. Tailored academic projects toward pharmaceuticals and drug formulation kinetics.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <p class="timeline-period">Target Expertise Tracks</p>
+          <h3>Core Technical & Research Areas</h3>
+          <p class="org">Biomedical Processes & Formulations</p>
+          <p>Skilled in interpreting chemical data graphs, troubleshooting analytical lab instruments, managing quality assessment standard procedures, and utilizing software packages for biochemical simulation or data analytics.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact">
+    <div class="container">
+      <p class="section-label">Get in touch</p>
+      <h2 class="section-title">Let's <em>Connect</em></h2>
+      <div class="rule"></div>
+      <p>Whether you're an industry recruiter from the pharmaceutical/biomedical sector, a fellow chemical engineer, or a research collaborator—I'd love to chat.</p>
+      <div class="contact-links">
+        <a href="mailto:mahfuzur@email.com" class="contact-link">✉️ Email Me</a>
+        <a href="https://linkedin.com" target="_blank" class="contact-link">💼 LinkedIn</a>
+        <a href="https://github.com" target="_blank" class="contact-link">💻 GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Mahfuzur Rahman · Built with intention · Engineered for impact.</p>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.diary-entry, .timeline-item').forEach(el => {
+      observer.observe(el);
+    });
+
+    function addEntry() {
+      const dateVal  = document.getElementById('entryDate').value;
+      const tag      = document.getElementById('entryTag').value;
+      const title    = document.getElementById('entryTitle').value.trim();
+      const body     = document.getElementById('entryBody').value.trim();
+
+      if (!title || !body) {
+        alert('Please fill in at least a title and your story.');
+        return;
+      }
+
+      let dateLabel = 'Today';
+      let yearLabel = new Date().getFullYear();
+      if (dateVal) {
+        const d = new Date(dateVal + 'T00:00:00');
+        dateLabel = d.toLocaleDateString('en-GB', { day:'2-digit', month:'short' });
+        yearLabel = d.getFullYear();
+      }
+
+      const entry = document.createElement('div');
+      entry.className = 'diary-entry';
+      entry.innerHTML = `
+        <div class="entry-date">
+          <span class="year">${yearLabel}</span>
+          ${dateLabel}
+        </div>
+        <div class="entry-content">
+          <p class="entry-tag">${tag}</p>
+          <h3>${title}</h3>
+          <p>${body}</p>
+        </div>`;
+
+      const grid = document.getElementById('diaryGrid');
+      grid.insertBefore(entry, grid.firstChild);
+
+      setTimeout(() => entry.classList.add('visible'), 50);
+      observer.observe(entry);
+
+      document.getElementById('entryDate').value  = '';
+      document.getElementById('entryTitle').value = '';
+      document.getElementById('entryBody').value  = '';
+    }
+  </script>
+
+</body>
+</html>
