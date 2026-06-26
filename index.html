@@ -96,7 +96,7 @@
         transparent,
         transparent 60px,
         rgba(44,122,123,0.04) 60px,
-        rgba(44,122,123,0.04) 61px
+        rgba(44,122,123,0.04) 1px
       );
       pointer-events: none;
     }
@@ -214,7 +214,6 @@
       overflow: hidden;
     }
     .about-portrait::after { content: ''; position: absolute; inset: 8px; border: 1px solid var(--rule); pointer-events: none; }
-    .portrait-placeholder { text-align: center; padding: 1rem; line-height: 2; }
     .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: 0.95rem; }
     .about-text p:first-of-type { font-family: var(--serif); font-size: 1.25rem; color: var(--ink); font-style: italic; line-height: 1.6; }
     .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
@@ -277,26 +276,13 @@
     .timeline-item h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; margin-bottom: 0.2rem; }
     .timeline-item .org { font-size: 0.85rem; color: var(--muted); font-style: italic; margin-bottom: 0.6rem; }
     .timeline-item p { font-size: 0.88rem; color: var(--muted); }
-    
-  <!-- CONTACT SECTION -->
-  <section id="contact">
-    <div class="container">
-      <p class="section-label">Get in touch</p>
-      <h2 class="section-title">Let's <em>Connect</em></h2>
-      <div class="rule"></div>
-      <p>Whether you're an industry recruiter from the pharmaceutical/biomedical sector, a fellow chemical engineer, or a research collaborator—I'd love to chat.</p>
-      <div class="contact-links">
-        <!-- Live Email -->
-        <a href="mailto:mahfuzjas02@gmail.com" class="contact-link">✉️ mahfuzjas02@gmail.com</a>
-        
-        <!-- Live LinkedIn (Cleaned up from Android tracking strings) -->
-        <a href="https://www.linkedin.com/in/mahfuzur-rahman-b71005412" target="_blank" class="contact-link">💼 LinkedIn</a>
-        
-        <!-- Live GitHub Profile Link -->
-        <a href="https://github.com/Mrahman09-eng" target="_blank" class="contact-link">💻 GitHub</a>
-      </div>
-    </div>
-  </section>
+
+    /* ============================================
+       CONTACT LINKS STYLING
+    ============================================ */
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+    .contact-link { display: inline-block; color: var(--ink); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
+    .contact-link:hover { color: var(--gold); }
 
     /* ============================================
        FOOTER
@@ -328,7 +314,6 @@
 
 <body>
 
-  <!-- NAVIGATION -->
   <nav id="navbar">
     <a href="#" class="nav-logo">Mahfuzur<span>.</span>Rahman</a>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -342,7 +327,6 @@
     </ul>
   </nav>
 
-  <!-- HERO SECTION -->
   <section class="hero" id="home">
     <div class="hero-inner">
       <p class="hero-eyebrow">Engineering Solutions for Life Sciences</p>
@@ -357,10 +341,8 @@
         <a href="#resume" class="btn btn-outline">View Resume</a>
       </div>
     </div>
-    
   </section>
 
-  <!-- ABOUT SECTION -->
   <section id="about">
     <div class="container">
       <p class="section-label">The Researcher</p>
@@ -369,7 +351,6 @@
       <div class="about-grid">
         <div class="about-portrait">
           <img src="194119.jpg" alt="Mahfuzur Rahman" style="width: 100%; height: 100%; object-fit: cover;">
-        </div>
         </div>
         <div class="about-text">
           <p>
@@ -392,7 +373,6 @@
     </div>
   </section>
 
-  <!-- DIARY SECTION -->
   <section id="diary">
     <div class="container">
       <p class="section-label">My life chapters</p>
@@ -400,7 +380,6 @@
       <div class="rule"></div>
 
       <div class="diary-grid" id="diaryGrid">
-        <!-- ENTRY: JASHORE ZILLA SCHOOL MILESTONE -->
         <div class="diary-entry">
           <div class="entry-date">
             <span class="year">2017</span>
@@ -410,7 +389,6 @@
             <p class="entry-tag">🌟 Academic Milestone</p>
             <h3>Foundations of Faith and Excellence: Jashore Zilla School</h3>
             
-            <!-- School Image Integration -->
             <div style="margin: 1rem 0; max-width: 100%; border: 1px solid var(--rule); overflow: hidden;">
               <img src="zilla-school.jpg" alt="Jashore Zilla School Historic Building" style="width: 100%; height: auto; display: block; object-fit: cover;">
             </div>
@@ -420,7 +398,6 @@
           </div>
         </div>
 
-        
         <div class="diary-entry">
           <div class="entry-date">
             <span class="year">2026</span>
@@ -444,10 +421,8 @@
             <p>Spent the afternoon reading up on advanced drug delivery systems. It's fascinating how core engineering kinetics and mass transport limitations apply perfectly to how molecules travel through biological pathways. Looking forward to exploring this bridge further in industry roles.</p>
           </div>
         </div>
-
       </div>
 
-      <!-- ADD ENTRY FORM -->
       <div class="add-entry-box">
         <h4>+ Add a temporary diary entry (Preview Live)</h4>
         <div class="form-row">
@@ -479,7 +454,6 @@
     </div>
   </section>
 
-  <!-- RESUME / TIMELINE SECTION -->
   <section id="resume">
     <div class="container">
       <p class="section-label">The professional journey</p>
@@ -487,7 +461,6 @@
       <div class="rule"></div>
 
       <div class="timeline">
-
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <p class="timeline-period">Academic Graduate</p>
@@ -503,12 +476,10 @@
           <p class="org">Biomedical Processes & Formulations</p>
           <p>Skilled in interpreting chemical data graphs, troubleshooting analytical lab instruments, managing quality assessment standard procedures, and utilizing software packages for biochemical simulation or data analytics.</p>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- CONTACT SECTION -->
   <section id="contact">
     <div class="container">
       <p class="section-label">Get in touch</p>
@@ -516,19 +487,17 @@
       <div class="rule"></div>
       <p>Whether you're an industry recruiter from the pharmaceutical/biomedical sector, a fellow chemical engineer, or a research collaborator—I'd love to chat.</p>
       <div class="contact-links">
-        <a href="mailto:mahfuzur@email.com" class="contact-link">✉️ Email Me</a>
-        <a href="https://linkedin.com" target="_blank" class="contact-link">💼 LinkedIn</a>
-        <a href="https://github.com" target="_blank" class="contact-link">💻 GitHub</a>
+        <a href="mailto:mahfuzjas02@gmail.com" class="contact-link">✉️ mahfuzjas02@gmail.com</a>
+        <a href="https://www.linkedin.com/in/mahfuzur-rahman-b71005412" target="_blank" class="contact-link">💼 LinkedIn</a>
+        <a href="https://github.com/Mrahman09-eng" target="_blank" class="contact-link">💻 GitHub</a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <p>© 2026 Mahfuzur Rahman · Built with intention · Engineered for impact.</p>
   </footer>
 
-  <!-- JAVASCRIPT -->
   <script>
     function toggleMenu() {
       document.getElementById('navLinks').classList.toggle('open');
